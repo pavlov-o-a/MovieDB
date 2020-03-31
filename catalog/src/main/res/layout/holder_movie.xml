@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.companyname.common.views.RoundCornersContainer
+        android:id="@+id/ivPosterContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:elevation="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:commonRadius="@dimen/card_small_radius">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivPoster"
+            android:layout_width="@dimen/catalog_poster_width"
+            android:layout_height="133dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/image_placeholder"/>
+
+    </com.companyname.common.views.RoundCornersContainer>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="15dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        app:layout_constraintStart_toEndOf="@id/ivPosterContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Movie title"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ratingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toEndOf="@id/ivPosterContainer"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        android:text="@string/rating_title"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/ratingTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="6.7"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/yearTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toEndOf="@id/ivPosterContainer"
+        app:layout_constraintTop_toBottomOf="@id/ratingTitle"
+        android:text="@string/release_title"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/yearTitle"
+        app:layout_constraintTop_toBottomOf="@id/ratingTitle"
+        tools:text="2019-09-17"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

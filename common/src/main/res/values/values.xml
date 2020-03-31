@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="action_catalogFragment_to_movieCard"/>
+    <declare-styleable name="RoundCornersContainer">
+        <attr name="leftTopRadius" format="dimension"/>
+        <attr name="rightTopRadius" format="dimension"/>
+        <attr name="leftBottomRadius" format="dimension"/>
+        <attr name="rightBottomRadius" format="dimension"/>
+        <attr name="commonRadius" format="dimension"/>
+        <attr name="isSquare" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="ShimmerView">
+        <attr name="centerColor" format="color"/>
+        <attr name="edgeColor" format="color"/>
+    </declare-styleable>
+</resources>

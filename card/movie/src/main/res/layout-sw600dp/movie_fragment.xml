@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:title = "Movie name"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.companyname.common.views.RoundCornersContainer
+                android:id="@+id/coverContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                app:commonRadius="@dimen/card_big_radius"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/cover"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    tools:srcCompat="@color/thick_yellow"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            </com.companyname.common.views.RoundCornersContainer>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/descriptionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                style="@style/MovieCardLabel"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/coverContainer"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_small_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/descriptionLabel"
+                app:layout_constraintStart_toEndOf="@id/coverContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description "
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imdbIcon"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:srcCompat="@drawable/imdb"
+                app:layout_constraintStart_toEndOf="@id/coverContainer"
+                app:layout_constraintTop_toBottomOf="@id/description"/>
+
+            <TextView
+                android:id="@+id/imdbLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/blue"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="234523515"
+                app:layout_constraintTop_toTopOf="@id/imdbIcon"
+                app:layout_constraintBottom_toBottomOf="@id/imdbIcon"
+                app:layout_constraintStart_toEndOf="@id/imdbIcon"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ratingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rating"
+                style="@style/MovieCardLabel"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/coverContainer"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:rating="3.4"
+                android:stepSize="0.2"
+                android:numStars="10"
+                android:progressDrawable="@drawable/rating"
+                android:minHeight="25dp"
+                android:maxHeight="25dp"
+                android:progressBackgroundTint="@color/grey"
+                android:isIndicator="true"
+                android:layout_marginTop="@dimen/default_small_margin"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/ratingLabel"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/genresLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/genres"
+                style="@style/MovieCardLabel"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rating"/>
+
+            <com.nex3z.flowlayout.FlowLayout
+                android:id="@+id/genresFlow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/genresLabel"
+                android:layout_marginTop="@dimen/default_small_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin">
+                <!-- ONLY FOR PREVIEW -->
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:chipBackgroundColor="@color/genre_chip_color_list"
+                    tools:text="Genre1"/>
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:chipBackgroundColor="@color/genre_chip_color_list"
+                    tools:text="LongGenre"/>
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:chipBackgroundColor="@color/genre_chip_color_list"
+                    tools:text="VeryLongGenre"/>
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:chipBackgroundColor="@color/genre_chip_color_list"
+                    tools:text="NormalGenre"/>
+            </com.nex3z.flowlayout.FlowLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/castLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cast"
+                style="@style/MovieCardLabel"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/genresFlow"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/castLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_small_margin"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/credit_holder"
+                app:layout_constraintTop_toBottomOf="@id/castLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/crewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crew"
+                style="@style/MovieCardLabel"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/castLayout"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/crewLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_small_margin"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/credit_holder"
+                app:layout_constraintTop_toBottomOf="@id/crewLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <FrameLayout
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <ProgressBar
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

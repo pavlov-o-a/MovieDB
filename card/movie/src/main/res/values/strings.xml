@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="description">Description</string>
+    <string name="rating">Rating</string>
+    <string name="genres">Genres</string>
+    <string name="open_imdb">Open in browser %s?</string>
+    <string name="cast">Cast</string>
+    <string name="crew">Crew</string>
+    <string name="show_screen_simulation">Simulate short screen</string>
+    <string name="hide_screen_simulation">Remove padding</string>
+    <string name="padding_disclaimer">Your screen is long enough to fit poster so this padding simulates situation when poster is longer than display.</string>
+</resources>

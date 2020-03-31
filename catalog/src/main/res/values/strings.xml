@@ -1,0 +1,7 @@
+<resources>
+    <string name="rating_title">rating:</string>
+    <string name="release_title">release date:</string>
+    <string name="release_year">release year:</string>
+    <string name="show_covers">show covers</string>
+    <string name="hide_covers">hide covers</string>
+</resources>

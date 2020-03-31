@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_small_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.companyname.common.views.RoundCornersContainer
+        android:id="@+id/creditCoverContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:commonRadius="@dimen/card_small_radius"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/creditCover"
+            android:layout_width="@dimen/credit_holder_width"
+            android:layout_height="@dimen/credit_holder_height"
+            app:srcCompat="@drawable/profile"/>
+    </com.companyname.common.views.RoundCornersContainer>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/creditName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="14sp"
+        tools:text="Name"
+        app:layout_constraintTop_toBottomOf="@id/creditCoverContainer"
+        app:layout_constraintStart_toStartOf="@id/creditCoverContainer"
+        app:layout_constraintEnd_toEndOf="@id/creditCoverContainer"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/creditRole"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="14sp"
+        tools:text="Role"
+        app:layout_constraintTop_toBottomOf="@id/creditName"
+        app:layout_constraintStart_toStartOf="@id/creditCoverContainer"
+        app:layout_constraintEnd_toEndOf="@id/creditCoverContainer"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

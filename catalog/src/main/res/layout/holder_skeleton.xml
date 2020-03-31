@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.companyname.common.views.ShimmerView
+        android:id="@+id/ivPoster"
+        android:layout_width="@dimen/catalog_poster_width"
+        android:layout_height="133dp"
+        android:layout_margin="@dimen/default_margin"
+        android:background="@drawable/round_light_grey_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.companyname.common.views.ShimmerView
+        android:id="@+id/tvTitle"
+        android:layout_width="130dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/round_light_grey_background"
+        app:layout_constraintStart_toEndOf="@id/ivPoster"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.companyname.common.views.ShimmerView
+        android:id="@+id/ratingTitle"
+        android:layout_width="100dp"
+        android:layout_height="17sp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/grey"
+        android:background="@drawable/round_light_grey_background"
+        app:layout_constraintStart_toEndOf="@id/ivPoster"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
+
+    <com.companyname.common.views.ShimmerView
+        android:id="@+id/yearTitle"
+        android:layout_width="150dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_light_grey_background"
+        app:layout_constraintStart_toEndOf="@id/ivPoster"
+        app:layout_constraintTop_toBottomOf="@id/ratingTitle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
