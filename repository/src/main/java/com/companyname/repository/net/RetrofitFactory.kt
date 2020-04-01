@@ -10,7 +10,7 @@ internal object RetrofitFactory {
 
     private const val BASE_URL = "https://api.themoviedb.org/3/"
     private const val API_KEY = "api_key"
-    private const val API_KEY_VALUE = ""
+    private const val API_KEY_VALUE = "3315326dfa126861184796dfb7d26e7e"
 
     private fun getRetrofit() = Retrofit.Builder()
         .client(getHttpClient())

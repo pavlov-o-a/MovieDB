@@ -5,7 +5,14 @@ import android.content.Context
 enum class RepositoryErrors {
     NO_CONNECTION,
     TIMEOUT,
-    UNKNOWN
+    UNKNOWN;
+
+    private var msg: String? = ""
+    fun message(msg: String?): RepositoryErrors{
+        this.msg = msg
+        return this
+    }
+    fun getMessage() = msg
 }
 
 fun RepositoryErrors.getNotification(context: Context): String{

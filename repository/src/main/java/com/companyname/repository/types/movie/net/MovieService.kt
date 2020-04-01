@@ -1,29 +1,27 @@
 package com.companyname.repository.types.movie.net
 
-import android.util.Log
 import com.companyname.repository.net.RetrofitFactory
 import com.companyname.repository.net.entities.CreditsResponse
 import com.companyname.repository.net.entities.MovieResponse
+import com.companyname.repository.net.entities.NetResponse
 
 internal class MovieService {
 
     private fun getApi() = RetrofitFactory.getService(MovieAPI::class.java)
 
-    suspend fun getMovie(id: Int): MovieResponse?{
-        try {
-            return getApi().getMovie(id)
+    suspend fun getMovie(id: Int): NetResponse<MovieResponse?>{
+        return try {
+            NetResponse(getApi().getMovie(id))
         } catch (exc: Exception){
-            Log.e("movies", "smth went wrong", exc)
+            NetResponse(null, exc.message)
         }
-        return null
     }
 
-    suspend fun getCredits(movieId: Int): CreditsResponse?{
-        try {
-            return getApi().getCredits(movieId)
+    suspend fun getCredits(movieId: Int): NetResponse<CreditsResponse?>{
+        return try {
+            NetResponse(getApi().getCredits(movieId))
         } catch (exc: Exception){
-            Log.e("movies", "smth went wrong", exc)
+            NetResponse(null, exc.message)
         }
-        return null
     }
 }

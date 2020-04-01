@@ -10,25 +10,27 @@ import com.companyname.repository.net.Mapper.toCredits
 
 internal class MovieRepositoryImp(): MovieRepository{
     override suspend fun getMovie(id: Int): RepositoryData<Movie> {
-        val fromNet = MovieService().getMovie(id)?.toMovie()
-        return if (fromNet != null){
-            RepositoryData(fromNet)
+        val response = MovieService().getMovie(id)
+        val movie = response.data?.toMovie()
+        return if (movie != null){
+            RepositoryData(movie)
         } else {
             RepositoryData<Movie>(
                 null,
-                RepositoryErrors.UNKNOWN
+                RepositoryErrors.UNKNOWN.message(response.error)
             )
         }
     }
 
     override suspend fun getCredits(movieId: Int): RepositoryData<Credits> {
-        val fromNet = MovieService().getCredits(movieId)?.toCredits()
-        return if (fromNet != null){
-            RepositoryData(fromNet)
+        val response = MovieService().getCredits(movieId)
+        val credits = response.data?.toCredits()
+        return if (credits != null){
+            RepositoryData(credits)
         } else {
             RepositoryData<Credits>(
                 null,
-                RepositoryErrors.UNKNOWN
+                RepositoryErrors.UNKNOWN.message(response.error)
             )
         }
     }

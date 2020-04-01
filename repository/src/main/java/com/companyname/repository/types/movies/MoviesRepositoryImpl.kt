@@ -10,16 +10,18 @@ import com.companyname.common.entities.MoviesPage
 
 internal class MoviesRepositoryImpl: MoviesRepository {
     override suspend fun getMovies(page: Int): RepositoryData<MoviesPage> {
-        val fromNet = MoviesService().getMovies(page)?.toMoviesPage()
-        return if (fromNet != null && fromNet.movies.isNotEmpty()){
-            MoviesStorage().saveMoviesPage(fromNet)
-            RepositoryData(fromNet)
+        val response = MoviesService().getMovies(page)
+        val moviesPage = response.data?.toMoviesPage()
+        return if (moviesPage != null && moviesPage.movies.isNotEmpty()){
+            MoviesStorage().saveMoviesPage(moviesPage)
+            RepositoryData(moviesPage)
         } else {
             val storageData = MoviesStorage().getMoviesPage()
             if (storageData.movies.isEmpty()){
+
                 RepositoryData<MoviesPage>(
                     null,
-                    RepositoryErrors.UNKNOWN
+                    RepositoryErrors.UNKNOWN.message(response.error)
                 )
             } else {
                 RepositoryData(storageData)
