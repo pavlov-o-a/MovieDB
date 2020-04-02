@@ -1,4 +1,4 @@
-# Little studying project.
+# Little project.
 
 ### Features:
 
