@@ -5,6 +5,7 @@
 * project has multiple feature modules.
 * project is written in kotlin.
 * uses coroutines.
+* uses dagger.
 * android jetpack components are used: LiveData, ViewModel, Navigation.
 * ui components: CoordinatorLayout with two custom Behaviors, RecyclerView with ViewTypes, custom shimmer on data loading.
 
