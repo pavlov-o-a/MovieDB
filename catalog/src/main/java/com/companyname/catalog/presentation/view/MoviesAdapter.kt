@@ -107,7 +107,7 @@ class MovieViewHolder(context: Context, root: ViewGroup): BindMovieViewHolder(
             .with(itemView.context)
             .load(imageUrl)
             .centerCrop()
-            .placeholder(R.drawable.image_placeholder)
+            .placeholder(com.companyname.moviedb.R.drawable.image_placeholder)
             .into(itemView.ivPoster)
     }
 }

@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -24,23 +22,26 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    dynamicFeatures = [":catalog",":card:movie"]
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$appcompat"
-    implementation "androidx.recyclerview:recyclerview:$recycler"
-    implementation "androidx.constraintlayout:constraintlayout:$constraint"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefresh"
-    implementation "androidx.core:core-ktx:$corektx"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation "com.google.android.material:material:$material"
-    implementation "com.github.bumptech.glide:glide:$glide"
-    implementation project(":catalog")
-    implementation project(":card:movie")
-    implementation project(":common")
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "androidx.appcompat:appcompat:$appcompat"
+    api "androidx.recyclerview:recyclerview:$recycler"
+    api "androidx.constraintlayout:constraintlayout:$constraint"
+    api "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefresh"
+    api "androidx.core:core-ktx:$corektx"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    api "com.google.android.material:material:$material"
+    api "com.github.bumptech.glide:glide:$glide"
+    api "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    api "androidx.navigation:navigation-ui-ktx:$nav_version"
+    api "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+
+
+    api project(":common")
+    api project(":repository")
 }

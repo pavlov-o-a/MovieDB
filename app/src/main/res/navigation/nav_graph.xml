@@ -5,6 +5,7 @@
     app:startDestination="@id/catalogFragment">
 
     <fragment
+        app:moduleName="catalog"
         android:id="@+id/catalogFragment"
         android:name="com.companyname.catalog.presentation.view.CatalogFragment"
         android:label="@string/catalog_title" >
@@ -13,6 +14,7 @@
             app:destination="@id/movieCard" />
     </fragment>
     <fragment
+        app:moduleName="movie"
         android:id="@+id/movieCard"
         android:name="com.companyname.movie.presentation.view.MovieCardFragment"/>
 </navigation>

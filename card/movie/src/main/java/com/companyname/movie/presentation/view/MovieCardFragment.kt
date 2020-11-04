@@ -9,7 +9,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -50,47 +49,47 @@ class MovieCardFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
-        viewModel.showProgress().observe(viewLifecycleOwner, Observer {
+        viewModel.showProgress().observe(viewLifecycleOwner, {
             progress.visibility = if (it) View.VISIBLE else View.GONE
         })
         viewModel.setBaseMovie(arguments?.getSerializable(BaseMovie::javaClass.name) as BaseMovie)
         setToolbar()
-        viewModel.getPosterPath().observe(viewLifecycleOwner, Observer {
+        viewModel.getPosterPath().observe(viewLifecycleOwner, {
             setCover(it)
         })
-        viewModel.getDescription().observe(viewLifecycleOwner, Observer {
+        viewModel.getDescription().observe(viewLifecycleOwner, {
             if (it.isNotBlank()){
                 descriptionLabel.visibility = View.VISIBLE
                 description.visibility = View.VISIBLE
                 description.text = it
             }
         })
-        viewModel.getErrorOnLoading().observe(viewLifecycleOwner, Observer {error ->
+        viewModel.getErrorOnLoading().observe(viewLifecycleOwner, {error ->
             error?.let {
                 Snackbar.make(cardContainer, it.getNotification(requireContext()), BaseTransientBottomBar.LENGTH_SHORT).show()
             }
         })
-        viewModel.getGenres().observe(viewLifecycleOwner, Observer {
+        viewModel.getGenres().observe(viewLifecycleOwner, {
             setGenres(it)
         })
-        viewModel.getImdb().observe(viewLifecycleOwner, Observer {
+        viewModel.getImdb().observe(viewLifecycleOwner, {
             if (it.isNotEmpty()) {
                 imdbLink.visibility = View.VISIBLE
                 imdbIcon.visibility = View.VISIBLE
                 setImdb(it)
             }
         })
-        viewModel.getRating().observe(viewLifecycleOwner, Observer {
+        viewModel.getRating().observe(viewLifecycleOwner, {
             if (it > 0){
                 ratingLabel.visibility = View.VISIBLE
                 rating.visibility = View.VISIBLE
                 rating.rating = it
             }
         })
-        viewModel.getCrew().observe(viewLifecycleOwner, Observer {
+        viewModel.getCrew().observe(viewLifecycleOwner, {
             setCrew(it)
         })
-        viewModel.getCast().observe(viewLifecycleOwner, Observer {
+        viewModel.getCast().observe(viewLifecycleOwner, {
             setCast(it)
         })
     }
@@ -156,7 +155,7 @@ class MovieCardFragment: Fragment() {
                 val chip = Chip(requireContext())
                 chip.text = genre.name
                 genresFlow.addView(chip)
-                chip.chipBackgroundColor = ContextCompat.getColorStateList(requireContext(), R.color.genre_chip_color_list)
+                chip.chipBackgroundColor = ContextCompat.getColorStateList(requireContext(), com.companyname.moviedb.R.color.genre_chip_color_list)
                 val marginParams = ViewGroup.MarginLayoutParams(chip.layoutParams)
                 marginParams.marginEnd = resources.getDimensionPixelSize(R.dimen.chip_margin)
                 chip.layoutParams = marginParams
@@ -208,8 +207,8 @@ class MovieCardFragment: Fragment() {
             ) {
                 val itemsCount = parent.adapter?.itemCount?:0
                 val position = parent.getChildAdapterPosition(view)
-                val padding = resources.getDimensionPixelSize(R.dimen.default_small_margin)
-                val margin = resources.getDimensionPixelSize(R.dimen.default_margin)
+                val padding = resources.getDimensionPixelSize(com.companyname.moviedb.R.dimen.default_small_margin)
+                val margin = resources.getDimensionPixelSize(com.companyname.moviedb.R.dimen.default_margin)
                 if (position == 0)
                     outRect.left = margin - padding
                 if (position == itemsCount-1)

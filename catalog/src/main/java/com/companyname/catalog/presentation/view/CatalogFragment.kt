@@ -5,7 +5,6 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,7 +39,7 @@ class CatalogFragment: Fragment() {
             },
             {
                 val bundle = bundleOf(BaseMovie::javaClass.name to it)
-                findNavController().navigate(R.id.action_catalogFragment_to_movieCard, bundle)
+                findNavController().navigate(com.companyname.moviedb.R.id.action_catalogFragment_to_movieCard, bundle)
             },
             3
         )
@@ -60,22 +59,22 @@ class CatalogFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         catalogViewModel = ViewModelProvider(this).get(CatalogViewModel::class.java)
-        catalogViewModel.getMovies().observe(viewLifecycleOwner, Observer {
+        catalogViewModel.getMovies().observe(viewLifecycleOwner, {
             moviesAdapter.setData(it)
             srMovies.isRefreshing = false
         })
-        catalogViewModel.progressBarVisible().observe(viewLifecycleOwner, Observer {
+        catalogViewModel.progressBarVisible().observe(viewLifecycleOwner, {
             progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
-        catalogViewModel.getErrorOnLoadingData().observe(viewLifecycleOwner, Observer {error ->
+        catalogViewModel.getErrorOnLoadingData().observe(viewLifecycleOwner, {error ->
             error?.let {
-                Snackbar.make(catalogContainer, it.getNotification(requireContext()), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(catalogContainer, it.getNotification(requireContext()), Snackbar.LENGTH_SHORT).show()
             }
         })
-        catalogViewModel.getAdapterType(requireContext()).observe(viewLifecycleOwner, Observer {
+        catalogViewModel.getAdapterType(requireContext()).observe(viewLifecycleOwner, {
             moviesAdapter.switchRepresentation(it)
         })
-        catalogViewModel.showSkeleton().observe(viewLifecycleOwner, Observer {
+        catalogViewModel.showSkeleton().observe(viewLifecycleOwner, {
             if (it) moviesAdapter.showSkeleton()
         })
     }
@@ -88,7 +87,7 @@ class CatalogFragment: Fragment() {
             catalogViewModel.switchCoversClicked(requireContext())
             true
         }
-        catalogViewModel.getCoversMenuTitle(requireContext()).observe(viewLifecycleOwner, Observer {
+        catalogViewModel.getCoversMenuTitle(requireContext()).observe(viewLifecycleOwner, {
             menuCoversSwitch?.title = requireContext().getString(it)
         })
     }

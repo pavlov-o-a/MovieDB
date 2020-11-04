@@ -1,2 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.companyname.catalog" />
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.companyname.catalog">
+
+    <dist:module dist:instant="false" dist:onDemand="false"
+        dist:title="@string/app_name">
+        <dist:fusing dist:include="false" />
+    </dist:module>
+
+</manifest>
