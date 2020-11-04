@@ -2,9 +2,9 @@
 
 ### Features:
 
-* project has multiple modules.
-* project is written on kotlin.
-* coroutines are used for background work.
+* project has multiple feature modules.
+* project is written in kotlin.
+* uses coroutines.
 * android jetpack components are used: LiveData, ViewModel, Navigation.
 * ui components: CoordinatorLayout with two custom Behaviors, RecyclerView with ViewTypes, custom shimmer on data loading.
 
