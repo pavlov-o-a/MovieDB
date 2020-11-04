@@ -1,13 +1,17 @@
 package com.companyname.movie.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.companyname.common.entities.*
-import com.companyname.movie.logic.LogicFactory
-import kotlinx.coroutines.*
+import com.companyname.movie.di.MovieScope
+import com.companyname.movie.logic.Logic
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Provider
 
-class MovieViewModel: ViewModel() {
+@MovieScope
+class MovieViewModel @Inject constructor(private val logic: Logic): ViewModel() {
     private lateinit var baseMovie: BaseMovie
     private var fullMovie: Movie? = null
     private var credits: Credits? = null
@@ -17,7 +21,7 @@ class MovieViewModel: ViewModel() {
     private val genres = MutableLiveData<List<Genre>>()
     private val rating = MutableLiveData<Float>()
     private val imdb = MutableLiveData<String>()
-    private val showProgress = MutableLiveData<Boolean>(true)
+    private val showProgress = MutableLiveData(true)
     private val castList = MutableLiveData<List<Actor>>()
     private val crewList = MutableLiveData<List<CrewMember>>()
 
@@ -31,8 +35,10 @@ class MovieViewModel: ViewModel() {
     private fun loadMovieData() {
         if (fullMovie == null) {
             showProgress.value = true
-            CoroutineScope(Dispatchers.IO).launch {
-                val repositoryData = LogicFactory.instance().getMovie(baseMovie.id)
+            viewModelScope.launch {
+                val repositoryData = withContext(Dispatchers.IO) {
+                    logic.getMovie(baseMovie.id)
+                }
                 val movie = repositoryData.data
                 val error = repositoryData.error
                 launch(Dispatchers.Main) {
@@ -54,8 +60,10 @@ class MovieViewModel: ViewModel() {
 
     private fun loadCredits(){
         if (credits == null) {
-            CoroutineScope(Dispatchers.IO).launch {
-                val repositoryData = LogicFactory.instance().getCredits(baseMovie.id)
+            viewModelScope.launch {
+                val repositoryData = withContext(Dispatchers.IO) {
+                    logic.getCredits(baseMovie.id)
+                }
                 val credits = repositoryData.data
                 val error = repositoryData.error
                 launch(Dispatchers.Main) {
@@ -103,4 +111,15 @@ class MovieViewModel: ViewModel() {
     fun getImdb(): LiveData<String> = imdb
     fun getCrew(): LiveData<List<CrewMember>> = crewList
     fun getCast(): LiveData<List<Actor>> = castList
+}
+
+@MovieScope
+class MovieViewModelFactory @Inject constructor(private val viewModel: Provider<MovieViewModel>): ViewModelProvider.Factory{
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.name == MovieViewModel::class.qualifiedName)
+            return viewModel.get() as T
+        else
+            throw RuntimeException("viewModel is not MovieViewModel - ${modelClass.name}")
+    }
+
 }

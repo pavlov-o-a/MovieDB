@@ -1,13 +1,15 @@
 package com.companyname.catalog.logic
 
+import com.companyname.catalog.di.CatalogScope
 import com.companyname.common.entities.MoviesPage
 import com.companyname.common.entities.RepositoryData
-import com.companyname.repository.RepositoryFactory
+import com.companyname.repository.types.movies.MoviesRepository
+import javax.inject.Inject
 
-
-class LogicImpl: Logic {
+@CatalogScope
+class LogicImpl @Inject constructor(private val moviesRepository: MoviesRepository): Logic {
 
     override suspend fun getMovies(page: Int): RepositoryData<MoviesPage> {
-        return RepositoryFactory.getRepository().getMoviesRepository().getMovies(page)
+        return moviesRepository.getMovies(page)
     }
 }

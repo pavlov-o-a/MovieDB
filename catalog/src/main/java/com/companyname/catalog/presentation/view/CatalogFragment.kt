@@ -9,16 +9,30 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.companyname.catalog.R
+import com.companyname.catalog.di.CatalogComponent
+import com.companyname.catalog.di.DaggerCatalogComponent
 import com.companyname.catalog.presentation.CatalogViewModel
+import com.companyname.catalog.presentation.CatalogViewModelFactory
 import com.companyname.common.entities.BaseMovie
 import com.companyname.common.entities.getNotification
+import com.companyname.moviedb.di.getAppComponent
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.catalog_fragment.*
+import javax.inject.Inject
 
 class CatalogFragment: Fragment() {
     private lateinit var catalogViewModel: CatalogViewModel
     private lateinit var moviesAdapter: MoviesAdapter
     private var menuCoversSwitch: MenuItem? = null
+    private lateinit var component: CatalogComponent
+    @Inject
+    lateinit var viewModelFactory: CatalogViewModelFactory
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        component = DaggerCatalogComponent.factory().create(requireContext().getAppComponent())
+        component.inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,7 +72,7 @@ class CatalogFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        catalogViewModel = ViewModelProvider(this).get(CatalogViewModel::class.java)
+        catalogViewModel = ViewModelProvider(this, viewModelFactory).get(CatalogViewModel::class.java)
         catalogViewModel.getMovies().observe(viewLifecycleOwner, {
             moviesAdapter.setData(it)
             srMovies.isRefreshing = false

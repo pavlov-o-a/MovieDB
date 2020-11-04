@@ -17,16 +17,24 @@ import com.bumptech.glide.Glide
 import com.companyname.common.Constants
 import com.companyname.common.entities.*
 import com.companyname.movie.R
+import com.companyname.movie.di.DaggerMovieComponent
+import com.companyname.movie.di.MovieComponent
 import com.companyname.movie.presentation.MovieViewModel
+import com.companyname.movie.presentation.MovieViewModelFactory
+import com.companyname.moviedb.di.getAppComponent
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.movie_fragment.*
+import javax.inject.Inject
 
 
 class MovieCardFragment: Fragment() {
     private lateinit var viewModel: MovieViewModel
     private var shortScreenMenu: MenuItem? = null
+    private lateinit var component: MovieComponent
+    @Inject
+    lateinit var viewModelFactory: MovieViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +45,8 @@ class MovieCardFragment: Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component = DaggerMovieComponent.factory().create(requireContext().getAppComponent())
+        component.inject(this)
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
@@ -48,7 +58,7 @@ class MovieCardFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MovieViewModel::class.java)
         viewModel.showProgress().observe(viewLifecycleOwner, {
             progress.visibility = if (it) View.VISIBLE else View.GONE
         })

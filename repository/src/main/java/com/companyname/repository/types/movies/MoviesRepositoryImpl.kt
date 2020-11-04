@@ -1,11 +1,11 @@
 package com.companyname.repository.types.movies
 
+import com.companyname.common.entities.MoviesPage
 import com.companyname.common.entities.RepositoryData
 import com.companyname.common.entities.RepositoryErrors
+import com.companyname.repository.net.Mapper.toMoviesPage
 import com.companyname.repository.types.movies.net.MoviesService
 import com.companyname.repository.types.movies.storage.MoviesStorage
-import com.companyname.repository.net.Mapper.toMoviesPage
-import com.companyname.common.entities.MoviesPage
 
 
 internal class MoviesRepositoryImpl: MoviesRepository {
@@ -19,7 +19,7 @@ internal class MoviesRepositoryImpl: MoviesRepository {
             val storageData = MoviesStorage().getMoviesPage()
             if (storageData.movies.isEmpty()){
 
-                RepositoryData<MoviesPage>(
+                RepositoryData(
                     null,
                     RepositoryErrors.UNKNOWN.message(response.error)
                 )

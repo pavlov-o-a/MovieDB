@@ -4,18 +4,18 @@ import com.companyname.common.entities.Credits
 import com.companyname.common.entities.Movie
 import com.companyname.common.entities.RepositoryData
 import com.companyname.common.entities.RepositoryErrors
-import com.companyname.repository.types.movie.net.MovieService
-import com.companyname.repository.net.Mapper.toMovie
 import com.companyname.repository.net.Mapper.toCredits
+import com.companyname.repository.net.Mapper.toMovie
+import com.companyname.repository.types.movie.net.MovieService
 
-internal class MovieRepositoryImp(): MovieRepository{
+internal class MovieRepositoryImp: MovieRepository{
     override suspend fun getMovie(id: Int): RepositoryData<Movie> {
         val response = MovieService().getMovie(id)
         val movie = response.data?.toMovie()
         return if (movie != null){
             RepositoryData(movie)
         } else {
-            RepositoryData<Movie>(
+            RepositoryData(
                 null,
                 RepositoryErrors.UNKNOWN.message(response.error)
             )
@@ -28,7 +28,7 @@ internal class MovieRepositoryImp(): MovieRepository{
         return if (credits != null){
             RepositoryData(credits)
         } else {
-            RepositoryData<Credits>(
+            RepositoryData(
                 null,
                 RepositoryErrors.UNKNOWN.message(response.error)
             )

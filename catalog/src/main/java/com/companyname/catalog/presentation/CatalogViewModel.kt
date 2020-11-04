@@ -1,19 +1,21 @@
 package com.companyname.catalog.presentation
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.companyname.catalog.R
-import com.companyname.common.entities.BaseMovie
-import com.companyname.common.entities.RepositoryErrors
-import com.companyname.catalog.logic.LogicFactory
+import com.companyname.catalog.logic.Logic
 import com.companyname.catalog.misc.CatalogSettings
 import com.companyname.catalog.presentation.view.FULL_HOLDER
 import com.companyname.catalog.presentation.view.LIGHT_HOLDER
-import kotlinx.coroutines.*
+import com.companyname.common.entities.BaseMovie
+import com.companyname.common.entities.RepositoryErrors
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Provider
 
-class CatalogViewModel: ViewModel() {
+class CatalogViewModel @Inject constructor(private val logic: Logic): ViewModel() {
     private var currentPage = 1
     private var isDataLoading = false
     private var moviesData: MutableLiveData<List<BaseMovie>>? = null
@@ -41,27 +43,25 @@ class CatalogViewModel: ViewModel() {
         if (isDataLoading || isLastPage) return
         isDataLoading = true
         progressBarIsVisible.value = true && !(showSkeleton.value?:false)
-        CoroutineScope(Dispatchers.IO).launch {
-            val nextMovies = LogicFactory.instance().getMovies(currentPage)
-            launch(Dispatchers.Main) {
-                val moviesPage = nextMovies.data
-                if (moviesPage != null && !moviesPage.movies.isNullOrEmpty()){
-                    showSkeleton.value = false
-                    val movies = mutableListOf<BaseMovie>()
-                    movies.addAll(moviesData?.value?: listOf())
-                    movies.addAll(moviesPage.movies)
-                    moviesData?.value = movies
-                    if (moviesPage.page == moviesPage.allPages)
-                        isLastPage = true
-                } else {
-                    nextMovies.error?.let {
-                        errorOnLoadingData.value = it
-                    }
+        viewModelScope.launch {
+            val nextMovies = withContext(Dispatchers.IO) { logic.getMovies(currentPage) }
+            val moviesPage = nextMovies.data
+            if (moviesPage != null && !moviesPage.movies.isNullOrEmpty()){
+                showSkeleton.value = false
+                val movies = mutableListOf<BaseMovie>()
+                movies.addAll(moviesData?.value?: listOf())
+                movies.addAll(moviesPage.movies)
+                moviesData?.value = movies
+                if (moviesPage.page == moviesPage.allPages)
+                    isLastPage = true
+            } else {
+                nextMovies.error?.let {
+                    errorOnLoadingData.value = it
                 }
-                isDataLoading = false
-                progressBarIsVisible.value = false
-                currentPage++
             }
+            isDataLoading = false
+            progressBarIsVisible.value = false
+            currentPage++
         }
     }
 
@@ -108,5 +108,15 @@ class CatalogViewModel: ViewModel() {
         else
             LIGHT_HOLDER
         adapterType.value = type
+    }
+}
+
+class CatalogViewModelFactory @Inject constructor(private val viewModel: Provider<CatalogViewModel>): ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.name == CatalogViewModel::class.qualifiedName){
+            return viewModel.get() as T
+        } else {
+            throw RuntimeException("unsupported view model: ${modelClass.canonicalName}")
+        }
     }
 }
