@@ -37,11 +37,11 @@ class RepositoryTest {
     }
 
     @Test
-    fun correctMoviesPageResponse(){
+    fun correctMoviesPageResponse() {
         runBlocking {
             val firstPage = 1
             val result = moviesRepository.getMovies(firstPage)
-            Assert.assertTrue(result.error?.getMessage()?: "unknown error",result.data != null)
+            Assert.assertTrue(result.error?.getMessage() ?: "unknown error", result.data != null)
         }
     }
 }
