@@ -1,5 +1,6 @@
 package com.companyname.repository.net
 
+import com.companyname.repository.BuildConfig
 import retrofit2.Retrofit
 import okhttp3.OkHttpClient
 import retrofit2.converter.gson.GsonConverterFactory
@@ -10,7 +11,7 @@ internal object RetrofitFactory {
 
     private const val BASE_URL = "https://api.themoviedb.org/3/"
     private const val API_KEY = "api_key"
-    private const val API_KEY_VALUE = ApiKey.key
+    private const val API_KEY_VALUE = BuildConfig.API_KEY
 
     private fun getRetrofit() = Retrofit.Builder()
         .client(getHttpClient())
