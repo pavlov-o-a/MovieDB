@@ -39,3 +39,7 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task deleteTests() {
+    delete fileTree(dir: "/", include: '**/build/test-results/**/*.xml')
+}
