@@ -1,7 +1,7 @@
 package com.companyname.movie.presentation
 
 import androidx.lifecycle.*
-import com.companyname.common.entities.*
+import com.companyname.shared.entities.*
 import com.companyname.movie.di.MovieScope
 import com.companyname.movie.logic.Logic
 import kotlinx.coroutines.Dispatchers

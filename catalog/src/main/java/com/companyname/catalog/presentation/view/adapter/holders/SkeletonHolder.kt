@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.companyname.catalog.R
 import com.companyname.catalog.presentation.view.adapter.BindMovieViewHolder
-import com.companyname.common.entities.BaseMovie
+import com.companyname.shared.entities.BaseMovie
 
 class SkeletonHolder(context: Context, root: ViewGroup) : BindMovieViewHolder(
         LayoutInflater.from(context).inflate(R.layout.holder_skeleton, root, false)

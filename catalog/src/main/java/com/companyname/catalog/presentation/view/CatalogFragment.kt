@@ -9,17 +9,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.companyname.catalog.R
+import com.companyname.catalog.databinding.CatalogFragmentBinding
 import com.companyname.catalog.di.CatalogComponent
 import com.companyname.catalog.di.DaggerCatalogComponent
 import com.companyname.catalog.presentation.CatalogViewModel
 import com.companyname.catalog.presentation.CatalogViewModelFactory
 import com.companyname.catalog.presentation.view.adapter.LoadMoreListener
 import com.companyname.catalog.presentation.view.adapter.MoviesAdapter
-import com.companyname.common.entities.BaseMovie
-import com.companyname.common.entities.getNotification
+import com.companyname.shared.entities.BaseMovie
 import com.companyname.moviedb.di.getAppComponent
+import com.companyname.moviedb.getNotification
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.catalog_fragment.*
 import javax.inject.Inject
 
 class CatalogFragment: Fragment() {
@@ -27,6 +27,8 @@ class CatalogFragment: Fragment() {
     private lateinit var moviesAdapter: MoviesAdapter
     private var menuCoversSwitch: MenuItem? = null
     private lateinit var component: CatalogComponent
+    private lateinit var viewBind: CatalogFragmentBinding
+
     @Inject
     lateinit var viewModelFactory: CatalogViewModelFactory
 
@@ -41,7 +43,9 @@ class CatalogFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.catalog_fragment, container, false)
+        return inflater.inflate(R.layout.catalog_fragment, container, false).apply {
+            viewBind = CatalogFragmentBinding.bind(this)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,22 +56,25 @@ class CatalogFragment: Fragment() {
                         catalogViewModel.loadMoreMovies()
                     }
                 },
-                {
-                    val bundle = bundleOf(BaseMovie::javaClass.name to it)
-                    findNavController().navigate(com.companyname.moviedb.R.id.action_catalogFragment_to_movieCard, bundle)
-                },
-                3
+            {
+                val bundle = bundleOf(BaseMovie::javaClass.name to it)
+                findNavController().navigate(
+                    com.companyname.moviedb.R.id.action_catalogFragment_to_movieCard,
+                    bundle
+                )
+            },
+            3
         )
-        (rvMovies.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-        rvMovies.adapter = moviesAdapter
-        srMovies.setOnRefreshListener {
+        (viewBind.rvMovies.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+        viewBind.rvMovies.adapter = moviesAdapter
+        viewBind.srMovies.setOnRefreshListener {
             catalogViewModel.refreshData()
         }
         setToolbar()
     }
 
     private fun setToolbar() {
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(viewBind.toolbar)
         setHasOptionsMenu(true)
     }
 
@@ -76,14 +83,18 @@ class CatalogFragment: Fragment() {
         catalogViewModel = ViewModelProvider(this, viewModelFactory).get(CatalogViewModel::class.java)
         catalogViewModel.getMovies().observe(viewLifecycleOwner, {
             moviesAdapter.setData(it)
-            srMovies.isRefreshing = false
+            viewBind.srMovies.isRefreshing = false
         })
         catalogViewModel.progressBarVisible().observe(viewLifecycleOwner, {
-            progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            viewBind.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
         catalogViewModel.getErrorOnLoadingData().observe(viewLifecycleOwner, {error ->
             error?.let {
-                Snackbar.make(catalogContainer, it.getNotification(requireContext()), Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    viewBind.catalogContainer,
+                    it.getNotification(requireContext()),
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         })
         catalogViewModel.getAdapterType(requireContext()).observe(viewLifecycleOwner, {

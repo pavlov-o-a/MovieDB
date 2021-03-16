@@ -1,8 +1,8 @@
 package com.companyname.movie.logic.network
 
-import com.companyname.common.entities.Credits
-import com.companyname.common.entities.Movie
-import com.companyname.common.entities.RepositoryData
+import com.companyname.shared.entities.Credits
+import com.companyname.shared.entities.Movie
+import com.companyname.shared.entities.RepositoryData
 
 interface MovieService {
     suspend fun getMovie(id: Int): RepositoryData<Movie>

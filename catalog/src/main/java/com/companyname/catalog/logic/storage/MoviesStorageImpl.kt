@@ -1,8 +1,8 @@
 package com.companyname.catalog.logic.storage
 
-import com.companyname.common.entities.BaseMovie
-import com.companyname.common.entities.Page
-import com.companyname.common.entities.RepositoryData
+import com.companyname.shared.entities.BaseMovie
+import com.companyname.shared.entities.Page
+import com.companyname.shared.entities.RepositoryData
 import javax.inject.Inject
 
 class MoviesStorageImpl @Inject constructor() : MoviesStorage {

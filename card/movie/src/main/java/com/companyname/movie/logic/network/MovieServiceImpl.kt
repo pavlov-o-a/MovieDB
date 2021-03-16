@@ -1,9 +1,9 @@
 package com.companyname.movie.logic.network
 
-import com.companyname.common.entities.Credits
-import com.companyname.common.entities.Movie
-import com.companyname.common.entities.RepositoryData
-import com.companyname.common.entities.RepositoryError
+import com.companyname.shared.entities.Credits
+import com.companyname.shared.entities.Movie
+import com.companyname.shared.entities.RepositoryData
+import com.companyname.shared.entities.RepositoryError
 import com.companyname.repository.net.Mapper.toCredits
 import com.companyname.repository.net.Mapper.toMovie
 import javax.inject.Inject

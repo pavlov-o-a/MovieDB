@@ -1,6 +1,6 @@
 package com.companyname.repository.net
 
-import com.companyname.common.entities.*
+import com.companyname.shared.entities.*
 import com.companyname.repository.net.entities.*
 import com.companyname.repository.net.entities.BaseMovieResponse
 import com.companyname.repository.net.entities.CreditsResponse
@@ -21,22 +21,26 @@ object Mapper {
     }
 
     fun BaseMovieResponse?.toBaseMovie(): BaseMovie {
-        return BaseMovie(this?.title?:"",
-            this?.rating?:0f,
-            this?.releaseDate?:"",
-            this?.posterPath?:"",
-            this?.id?:0)
+        return BaseMovie(
+            this?.title ?: "",
+            this?.rating ?: 0f,
+            this?.releaseDate ?: "",
+            this?.posterPath ?: "",
+            this?.id ?: 0
+        )
     }
 
     fun MovieResponse?.toMovie(): Movie {
-        return Movie(this?.title?:"",
-            this?.description?:"",
-            this?.rating?:0f,
-            this?.releaseDate?:"",
+        return Movie(
+            this?.title ?: "",
+            this?.description ?: "",
+            this?.rating ?: 0f,
+            this?.releaseDate ?: "",
             this?.genres?.toGenres() ?: listOf(),
-            this?.imdb?:"",
-            this?.posterPath?:"",
-            this?.id?:0)
+            this?.imdb ?: "",
+            this?.posterPath ?: "",
+            this?.id ?: 0
+        )
     }
 
     fun List<GenreResponse>.toGenres(): List<Genre> {
@@ -52,25 +56,24 @@ object Mapper {
 
     fun CreditsResponse.toCredits(): Credits {
         return Credits(
-            this.
-                cast?.
-                map { it.toActor() }?.
-                filter { it.name.isNotEmpty() }?: listOf(),
-                this.
-                crew?.
-                map { it.toCrewMember() }?.
-                filter { it.name.isNotEmpty() }?: listOf())
+            this.cast?.map { it.toActor() }?.filter { it.name.isNotEmpty() } ?: listOf(),
+            this.crew?.map { it.toCrewMember() }?.filter { it.name.isNotEmpty() } ?: listOf()
+        )
     }
 
     fun ActorResponse.toActor(): Actor {
-        return Actor(this.name?:"",
-            this.character?:"",
-            this.photo?:"")
+        return Actor(
+            this.name ?: "",
+            this.character ?: "",
+            this.photo ?: ""
+        )
     }
 
     fun CrewMemberResponse.toCrewMember(): CrewMember {
-        return CrewMember(this.name?:"",
-            this.job?:"",
-            this.photo?:"")
+        return CrewMember(
+            this.name ?: "",
+            this.job ?: "",
+            this.photo ?: ""
+        )
     }
 }

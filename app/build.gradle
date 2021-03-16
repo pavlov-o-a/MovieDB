@@ -23,6 +23,10 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+
+    buildFeatures {
+        viewBinding true
+    }
     dynamicFeatures = [":catalog",":card:movie"]
 }
 
@@ -48,4 +52,5 @@ dependencies {
 
     api project(":common")
     api project(":repository")
+    api project(":shared")
 }

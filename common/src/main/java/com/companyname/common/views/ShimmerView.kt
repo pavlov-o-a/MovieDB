@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
-import com.companyname.common.entities.R
+import com.companyname.shared.entities.R
 import kotlin.math.cos
 
 const val SHIMMER_STEP_DP = 10f

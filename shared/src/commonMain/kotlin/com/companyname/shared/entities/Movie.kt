@@ -1,4 +1,4 @@
-package com.companyname.common.entities
+package com.companyname.shared.entities
 
 class Movie(
     title: String,

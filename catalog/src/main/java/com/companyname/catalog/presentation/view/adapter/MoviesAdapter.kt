@@ -3,7 +3,7 @@ package com.companyname.catalog.presentation.view.adapter
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.companyname.common.entities.BaseMovie
+import com.companyname.shared.entities.BaseMovie
 
 const val SKELETON_ITEMS_COUNT = 15
 

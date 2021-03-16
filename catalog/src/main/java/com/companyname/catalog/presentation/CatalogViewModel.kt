@@ -7,8 +7,8 @@ import com.companyname.catalog.logic.Logic
 import com.companyname.catalog.misc.CatalogSettings
 import com.companyname.catalog.presentation.view.adapter.AdapterType
 import com.companyname.catalog.presentation.view.adapter.generateAdapterType
-import com.companyname.common.entities.BaseMovie
-import com.companyname.common.entities.RepositoryError
+import com.companyname.shared.entities.BaseMovie
+import com.companyname.shared.entities.RepositoryError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

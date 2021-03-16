@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.companyname.common.Constants
+import com.companyname.shared.Constants
 import com.companyname.movie.R
-import kotlinx.android.synthetic.main.credit_holder.view.*
+import com.companyname.movie.databinding.CreditHolderBinding
 
 class CreditsAdapter(val data: List<CreditData>): RecyclerView.Adapter<CreditsHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreditsHolder {
@@ -22,10 +22,11 @@ class CreditsAdapter(val data: List<CreditData>): RecyclerView.Adapter<CreditsHo
 }
 
 class CreditsHolder(view: View): RecyclerView.ViewHolder(view) {
+    val bind = CreditHolderBinding.bind(view)
 
-    fun bind(data: CreditData){
-        itemView.creditName.text = data.name
-        itemView.creditRole.text = data.role
+    fun bind(data: CreditData) {
+        bind.creditName.text = data.name
+        bind.creditRole.text = data.role
         if (data.imgPath.isNotEmpty()) {
             val coverWidth =
                 itemView.context.resources.getDimensionPixelSize(R.dimen.credit_holder_width)
@@ -38,7 +39,7 @@ class CreditsHolder(view: View): RecyclerView.ViewHolder(view) {
                 .load(imageUrl)
                 .centerCrop()
                 .placeholder(R.drawable.profile)
-                .into(itemView.creditCover)
+                .into(bind.creditCover)
         }
     }
 }

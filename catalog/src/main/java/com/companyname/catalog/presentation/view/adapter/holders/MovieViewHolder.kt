@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.companyname.catalog.R
 import com.companyname.catalog.presentation.view.adapter.BindMovieViewHolder
-import com.companyname.common.Constants
-import com.companyname.common.entities.BaseMovie
+import com.companyname.shared.Constants
+import com.companyname.shared.entities.BaseMovie
 import kotlinx.android.synthetic.main.holder_movie.view.*
 
 class MovieViewHolder(context: Context, root: ViewGroup) : BindMovieViewHolder(

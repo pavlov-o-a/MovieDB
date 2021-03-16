@@ -1,4 +1,4 @@
-package com.companyname.common
+package com.companyname.shared
 
 object Constants {
     val IMAGES_URL = "http://image.tmdb.org/t/p/"

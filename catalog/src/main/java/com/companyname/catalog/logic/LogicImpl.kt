@@ -3,7 +3,7 @@ package com.companyname.catalog.logic
 import com.companyname.catalog.di.CatalogScope
 import com.companyname.catalog.logic.network.MoviesService
 import com.companyname.catalog.logic.storage.MoviesStorage
-import com.companyname.common.entities.*
+import com.companyname.shared.entities.*
 import javax.inject.Inject
 
 @CatalogScope

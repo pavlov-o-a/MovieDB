@@ -1,4 +1,4 @@
-package com.companyname.common.entities
+package com.companyname.shared.entities
 
 import java.io.Serializable
 

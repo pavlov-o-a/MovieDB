@@ -1,6 +1,6 @@
 package com.companyname.catalog.logic.network
 
-import com.companyname.common.entities.*
+import com.companyname.shared.entities.*
 import com.companyname.repository.net.Mapper.toMoviesPage
 import javax.inject.Inject
 

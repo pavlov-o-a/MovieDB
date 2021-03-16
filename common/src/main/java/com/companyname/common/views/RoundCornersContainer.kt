@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import com.companyname.common.entities.R
+import com.companyname.shared.entities.R
 
 import kotlin.math.min
 
