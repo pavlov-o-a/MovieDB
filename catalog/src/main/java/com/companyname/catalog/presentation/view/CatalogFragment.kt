@@ -13,6 +13,8 @@ import com.companyname.catalog.di.CatalogComponent
 import com.companyname.catalog.di.DaggerCatalogComponent
 import com.companyname.catalog.presentation.CatalogViewModel
 import com.companyname.catalog.presentation.CatalogViewModelFactory
+import com.companyname.catalog.presentation.view.adapter.LoadMoreListener
+import com.companyname.catalog.presentation.view.adapter.MoviesAdapter
 import com.companyname.common.entities.BaseMovie
 import com.companyname.common.entities.getNotification
 import com.companyname.moviedb.di.getAppComponent
@@ -45,17 +47,16 @@ class CatalogFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         moviesAdapter = MoviesAdapter(
-            requireContext(),
-            object : LoadMoreListener {
-                override fun loadMore() {
-                    catalogViewModel.loadMoreMovies()
-                }
-            },
-            {
-                val bundle = bundleOf(BaseMovie::javaClass.name to it)
-                findNavController().navigate(com.companyname.moviedb.R.id.action_catalogFragment_to_movieCard, bundle)
-            },
-            3
+                object : LoadMoreListener {
+                    override fun loadMore() {
+                        catalogViewModel.loadMoreMovies()
+                    }
+                },
+                {
+                    val bundle = bundleOf(BaseMovie::javaClass.name to it)
+                    findNavController().navigate(com.companyname.moviedb.R.id.action_catalogFragment_to_movieCard, bundle)
+                },
+                3
         )
         (rvMovies.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
         rvMovies.adapter = moviesAdapter
@@ -86,7 +87,7 @@ class CatalogFragment: Fragment() {
             }
         })
         catalogViewModel.getAdapterType(requireContext()).observe(viewLifecycleOwner, {
-            moviesAdapter.switchRepresentation(it)
+            moviesAdapter.changeRepresentation(it)
         })
         catalogViewModel.showSkeleton().observe(viewLifecycleOwner, {
             if (it) moviesAdapter.showSkeleton()

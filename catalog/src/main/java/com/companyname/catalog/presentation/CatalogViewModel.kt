@@ -5,8 +5,8 @@ import androidx.lifecycle.*
 import com.companyname.catalog.R
 import com.companyname.catalog.logic.Logic
 import com.companyname.catalog.misc.CatalogSettings
-import com.companyname.catalog.presentation.view.FULL_HOLDER
-import com.companyname.catalog.presentation.view.LIGHT_HOLDER
+import com.companyname.catalog.presentation.view.adapter.AdapterType
+import com.companyname.catalog.presentation.view.adapter.generateAdapterType
 import com.companyname.common.entities.BaseMovie
 import com.companyname.common.entities.RepositoryErrors
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +22,7 @@ class CatalogViewModel @Inject constructor(private val logic: Logic): ViewModel(
     private val progressBarIsVisible: MutableLiveData<Boolean> = MutableLiveData(false)
     private val errorOnLoadingData: MutableLiveData<RepositoryErrors?> = MutableLiveData(null)
     private val menuCoversTitle: MutableLiveData<Int> = MutableLiveData(-1)
-    private val adapterType: MutableLiveData<Int> = MutableLiveData(-1)
+    private val adapterType: MutableLiveData<AdapterType> = MutableLiveData(AdapterType.FULL)
     private val showSkeleton: MutableLiveData<Boolean> = MutableLiveData(false)
     private var isLastPage = false
 
@@ -85,7 +85,7 @@ class CatalogViewModel @Inject constructor(private val logic: Logic): ViewModel(
         return menuCoversTitle
     }
 
-    fun getAdapterType(context: Context): LiveData<Int>{
+    fun getAdapterType(context: Context): LiveData<AdapterType> {
         updateAdapterType(context)
         return adapterType
     }
@@ -103,11 +103,7 @@ class CatalogViewModel @Inject constructor(private val logic: Logic): ViewModel(
     }
 
     private fun updateAdapterType(context: Context){
-        val type = if (CatalogSettings.shouldShowImages(context))
-            FULL_HOLDER
-        else
-            LIGHT_HOLDER
-        adapterType.value = type
+        adapterType.value = generateAdapterType(CatalogSettings.shouldShowImages(context))
     }
 }
 
