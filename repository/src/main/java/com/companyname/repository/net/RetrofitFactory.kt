@@ -5,21 +5,21 @@ import retrofit2.Retrofit
 import okhttp3.OkHttpClient
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
+private const val BASE_URL = "https://api.themoviedb.org/3/"
+private const val API_KEY = "api_key"
+private const val API_KEY_VALUE = BuildConfig.API_KEY
 
-object RetrofitFactory {
+class RetrofitFactory @Inject constructor() {
 
-    private const val BASE_URL = "https://api.themoviedb.org/3/"
-    private const val API_KEY = "api_key"
-    private const val API_KEY_VALUE = BuildConfig.API_KEY
-
-    private fun getRetrofit() = Retrofit.Builder()
+    fun getRetrofit() = Retrofit.Builder()
         .client(getHttpClient())
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BASE_URL)
         .build()
 
-    private fun getHttpClient(): OkHttpClient{
+    private fun getHttpClient(): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor { chain ->
             val original = chain.request()
@@ -33,9 +33,5 @@ object RetrofitFactory {
         httpClient.connectTimeout(5, TimeUnit.SECONDS)
         httpClient.readTimeout(5, TimeUnit.SECONDS)
         return httpClient.build()
-    }
-
-    fun <T> getService(service: Class<T>): T {
-        return getRetrofit().create(service)
     }
 }

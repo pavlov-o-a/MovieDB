@@ -1,4 +1,4 @@
-package com.companyname.moviedb.di
+package com.companyname.common
 
 import javax.inject.Scope
 

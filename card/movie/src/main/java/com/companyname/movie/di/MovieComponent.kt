@@ -2,6 +2,7 @@ package com.companyname.movie.di
 
 import com.companyname.movie.presentation.view.MovieCardFragment
 import com.companyname.moviedb.di.AppComponent
+import com.companyname.repository.net.NetworkModule
 import dagger.Component
 
 @MovieScope

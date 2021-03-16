@@ -2,6 +2,7 @@ package com.companyname.catalog.di
 
 import com.companyname.catalog.presentation.view.CatalogFragment
 import com.companyname.moviedb.di.AppComponent
+import com.companyname.repository.net.NetworkModule
 import dagger.Component
 
 @CatalogScope

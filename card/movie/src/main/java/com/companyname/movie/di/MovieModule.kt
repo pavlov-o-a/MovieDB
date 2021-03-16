@@ -7,7 +7,7 @@ import com.companyname.movie.logic.network.MovieService
 import com.companyname.movie.logic.network.MovieServiceImpl
 import com.companyname.movie.logic.storage.MovieStorage
 import com.companyname.movie.logic.storage.MovieStorageImpl
-import com.companyname.repository.net.RetrofitFactory
+import com.companyname.repository.net.ServiceFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -26,8 +26,8 @@ abstract class MovieModule {
 
     companion object {
         @Provides
-        fun movieApi(): MovieAPI {
-            return RetrofitFactory.getService(MovieAPI::class.java)
+        fun movieApi(serviceFactory: ServiceFactory): MovieAPI {
+            return serviceFactory.getService(MovieAPI::class.java)
         }
     }
 }

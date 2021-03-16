@@ -8,6 +8,7 @@ import com.companyname.catalog.logic.network.MoviesServiceImpl
 import com.companyname.catalog.logic.storage.MoviesStorage
 import com.companyname.catalog.logic.storage.MoviesStorageImpl
 import com.companyname.repository.net.RetrofitFactory
+import com.companyname.repository.net.ServiceFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -27,8 +28,8 @@ abstract class CatalogModule {
 
     companion object {
         @Provides
-        fun moviesApi(): MoviesAPI {
-            return RetrofitFactory.getService(MoviesAPI::class.java)
+        fun moviesApi(serviceFactory: ServiceFactory): MoviesAPI {
+            return serviceFactory.getService(MoviesAPI::class.java)
         }
     }
 }
