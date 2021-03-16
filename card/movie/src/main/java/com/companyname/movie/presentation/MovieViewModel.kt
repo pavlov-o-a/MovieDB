@@ -15,7 +15,7 @@ class MovieViewModel @Inject constructor(private val logic: Logic): ViewModel() 
     private lateinit var baseMovie: BaseMovie
     private var fullMovie: Movie? = null
     private var credits: Credits? = null
-    private val errorOnLoading = MutableLiveData<RepositoryErrors?>()
+    private val errorOnLoading = MutableLiveData<RepositoryError?>()
     private val cardDescription = MutableLiveData<String>()
     private val posterPath = MutableLiveData<String>()
     private val genres = MutableLiveData<List<Genre>>()
@@ -103,7 +103,7 @@ class MovieViewModel @Inject constructor(private val logic: Logic): ViewModel() 
     }
 
     fun showProgress(): LiveData<Boolean> = showProgress
-    fun getErrorOnLoading(): LiveData<RepositoryErrors?> = errorOnLoading
+    fun getErrorOnLoading(): LiveData<RepositoryError?> = errorOnLoading
     fun getDescription(): LiveData<String> = cardDescription
     fun getPosterPath(): LiveData<String> = posterPath
     fun getGenres(): LiveData<List<Genre>> = genres

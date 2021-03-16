@@ -7,18 +7,17 @@ import com.companyname.repository.net.entities.CreditsResponse
 import com.companyname.repository.net.entities.MovieResponse
 import com.companyname.repository.net.entities.MoviesTop
 
-internal object Mapper {
+object Mapper {
 
-    fun MoviesTop?.toMoviesPage(): MoviesPage {
-        return MoviesPage(this?.page?:0,
-            this?.allPages?:0,
-            this?.results?.
-                map { it.toBaseMovie() }?.
-                filter {
-                    it.title.isNotEmpty()
-                            && it.year.isNotEmpty()
-                            && it.id > 0
-                }?: listOf())
+    fun MoviesTop?.toMoviesPage(): Page<BaseMovie> {
+        return Page(this?.page ?: 0,
+            this?.allPages ?: 0,
+            this?.results?.map { it.toBaseMovie() }?.filter {
+                it.title.isNotEmpty()
+                        && it.year.isNotEmpty()
+                        && it.id > 0
+            } ?: listOf()
+        )
     }
 
     fun BaseMovieResponse?.toBaseMovie(): BaseMovie {

@@ -1,8 +1,7 @@
 package com.companyname.catalog.logic
 
-import com.companyname.common.entities.MoviesPage
-import com.companyname.common.entities.RepositoryData
+import com.companyname.common.entities.*
 
 interface Logic {
-    suspend fun getMovies(page: Int): RepositoryData<MoviesPage>
+    suspend fun getMovies(page: Int, isSync: Boolean): RepositoryData<Page<BaseMovie>>
 }

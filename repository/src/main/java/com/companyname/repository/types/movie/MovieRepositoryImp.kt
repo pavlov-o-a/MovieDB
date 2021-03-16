@@ -3,7 +3,7 @@ package com.companyname.repository.types.movie
 import com.companyname.common.entities.Credits
 import com.companyname.common.entities.Movie
 import com.companyname.common.entities.RepositoryData
-import com.companyname.common.entities.RepositoryErrors
+import com.companyname.common.entities.RepositoryError
 import com.companyname.repository.net.Mapper.toCredits
 import com.companyname.repository.net.Mapper.toMovie
 import com.companyname.repository.types.movie.net.MovieService
@@ -17,7 +17,7 @@ internal class MovieRepositoryImp: MovieRepository{
         } else {
             RepositoryData(
                 null,
-                RepositoryErrors.UNKNOWN.message(response.error)
+                RepositoryError.UNKNOWN.message(response.error)
             )
         }
     }
@@ -30,7 +30,7 @@ internal class MovieRepositoryImp: MovieRepository{
         } else {
             RepositoryData(
                 null,
-                RepositoryErrors.UNKNOWN.message(response.error)
+                RepositoryError.UNKNOWN.message(response.error)
             )
         }
     }

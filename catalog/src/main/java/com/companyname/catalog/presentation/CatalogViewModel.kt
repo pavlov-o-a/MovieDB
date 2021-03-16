@@ -8,7 +8,7 @@ import com.companyname.catalog.misc.CatalogSettings
 import com.companyname.catalog.presentation.view.adapter.AdapterType
 import com.companyname.catalog.presentation.view.adapter.generateAdapterType
 import com.companyname.common.entities.BaseMovie
-import com.companyname.common.entities.RepositoryErrors
+import com.companyname.common.entities.RepositoryError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,7 +20,7 @@ class CatalogViewModel @Inject constructor(private val logic: Logic): ViewModel(
     private var isDataLoading = false
     private var moviesData: MutableLiveData<List<BaseMovie>>? = null
     private val progressBarIsVisible: MutableLiveData<Boolean> = MutableLiveData(false)
-    private val errorOnLoadingData: MutableLiveData<RepositoryErrors?> = MutableLiveData(null)
+    private val errorOnLoadingData: MutableLiveData<RepositoryError?> = MutableLiveData(null)
     private val menuCoversTitle: MutableLiveData<Int> = MutableLiveData(-1)
     private val adapterType: MutableLiveData<AdapterType> = MutableLiveData(AdapterType.FULL)
     private val showSkeleton: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -37,20 +37,20 @@ class CatalogViewModel @Inject constructor(private val logic: Logic): ViewModel(
 
     fun progressBarVisible(): LiveData<Boolean> = progressBarIsVisible
 
-    fun getErrorOnLoadingData(): LiveData<RepositoryErrors?> = errorOnLoadingData
+    fun getErrorOnLoadingData(): LiveData<RepositoryError?> = errorOnLoadingData
 
     fun loadMoreMovies() {
         if (isDataLoading || isLastPage) return
         isDataLoading = true
         progressBarIsVisible.value = true && !(showSkeleton.value?:false)
         viewModelScope.launch {
-            val nextMovies = withContext(Dispatchers.IO) { logic.getMovies(currentPage) }
+            val nextMovies = withContext(Dispatchers.IO) { logic.getMovies(currentPage, true) }
             val moviesPage = nextMovies.data
-            if (moviesPage != null && !moviesPage.movies.isNullOrEmpty()){
+            if (moviesPage != null && !moviesPage.data.isNullOrEmpty()) {
                 showSkeleton.value = false
                 val movies = mutableListOf<BaseMovie>()
-                movies.addAll(moviesData?.value?: listOf())
-                movies.addAll(moviesPage.movies)
+                movies.addAll(moviesData?.value ?: listOf())
+                movies.addAll(moviesPage.data)
                 moviesData?.value = movies
                 if (moviesPage.page == moviesPage.allPages)
                     isLastPage = true
