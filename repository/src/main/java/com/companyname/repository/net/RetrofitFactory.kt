@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-internal object RetrofitFactory {
+object RetrofitFactory {
 
     private const val BASE_URL = "https://api.themoviedb.org/3/"
     private const val API_KEY = "api_key"
