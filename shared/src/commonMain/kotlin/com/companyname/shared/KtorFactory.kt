@@ -1,10 +1,9 @@
 package com.companyname.shared
 
-import io.ktor.client.*
+import com.companyname.shared.network.KtorWrapper
 
 object KtorFactory {
+    private val wrapper = KtorWrapper()
 
-    fun getKtor() {
-        val client = HttpClient()
-    }
+    fun getKtor() = wrapper
 }

@@ -10,11 +10,11 @@
         android:name="com.companyname.catalog.presentation.view.CatalogFragment"
         android:label="@string/catalog_title" >
         <action
-            android:id="@+id/action_catalogFragment_to_movieCard"
+            android:id="@id/action_catalogFragment_to_movieCard"
             app:destination="@id/movieCard" />
     </fragment>
     <fragment
-        app:moduleName="movie"
+        app:moduleName="movie_app"
         android:id="@+id/movieCard"
         android:name="com.companyname.movie.presentation.view.MovieCardFragment"/>
 </navigation>

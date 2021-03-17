@@ -16,9 +16,9 @@ import com.companyname.catalog.presentation.CatalogViewModel
 import com.companyname.catalog.presentation.CatalogViewModelFactory
 import com.companyname.catalog.presentation.view.adapter.LoadMoreListener
 import com.companyname.catalog.presentation.view.adapter.MoviesAdapter
-import com.companyname.shared.entities.BaseMovie
 import com.companyname.moviedb.di.getAppComponent
 import com.companyname.moviedb.getNotification
+import com.companyname.shared.entities.serialize
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -57,7 +57,7 @@ class CatalogFragment: Fragment() {
                     }
                 },
             {
-                val bundle = bundleOf(BaseMovie::javaClass.name to it)
+                val bundle = bundleOf("BaseMovie" to it.serialize())
                 findNavController().navigate(
                     com.companyname.moviedb.R.id.action_catalogFragment_to_movieCard,
                     bundle

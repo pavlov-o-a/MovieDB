@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 val ktor_version: String by project
 val kotlin_version: String by project
-val koin_version: String by project
 val kotlinx_serialization: String by project
 
 plugins {
@@ -11,14 +10,12 @@ plugins {
     kotlin("multiplatform")
 }
 
-configurations.create("compileClasspath")
-
 kotlin {
     android()
     ios {
         binaries {
             framework {
-                baseName = "shared"
+                baseName = "card:movie:movie_shared"
             }
         }
     }
@@ -28,9 +25,8 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktor_version")
                 implementation("io.ktor:ktor-client-cio:$ktor_version")
                 implementation("io.ktor:ktor-client-serialization:$ktor_version")
-                implementation("org.jetbrains.kotlin:kotlin-serialization:$kotlin_version")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization")
-                implementation("io.insert-koin:koin-core:$koin_version")
+                implementation(project(":shared"))
             }
         }
         val androidMain by getting
@@ -45,6 +41,10 @@ android {
         targetSdkVersion(30)
     }
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+}
+
+dependencies {
+    project(":shared")
 }
 
 val packForXcode by tasks.creating(Sync::class) {

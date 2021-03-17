@@ -12,6 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String","API_KEY", API_KEY)
     }
     buildTypes {
         release {
@@ -27,7 +28,7 @@ android {
     buildFeatures {
         viewBinding true
     }
-    dynamicFeatures = [":catalog",":card:movie:app"]
+    dynamicFeatures = [":catalog", ':card:movie:movie_app']
 }
 
 dependencies {

@@ -1,9 +1,11 @@
 package com.companyname.repository.net
 
 import com.companyname.repository.BuildConfig
-import retrofit2.Retrofit
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType
 import okhttp3.OkHttpClient
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -12,10 +14,11 @@ private const val API_KEY = "api_key"
 private const val API_KEY_VALUE = BuildConfig.API_KEY
 
 class RetrofitFactory @Inject constructor() {
-
     fun getRetrofit() = Retrofit.Builder()
         .client(getHttpClient())
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(Json {
+            ignoreUnknownKeys = true
+        }.asConverterFactory(MediaType.parse("application/json")!!))
         .baseUrl(BASE_URL)
         .build()
 
