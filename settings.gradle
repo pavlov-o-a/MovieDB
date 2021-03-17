@@ -1,3 +1,4 @@
 include ':app', ':catalog', ':repository', ':common'
 include ':card:movie:app'
+include ':card:movie:shared'
 include ':shared'

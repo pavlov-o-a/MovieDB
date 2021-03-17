@@ -4,16 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.companyname.catalog.R
+import com.companyname.catalog.databinding.HolderMovieLightBinding
 import com.companyname.catalog.presentation.view.adapter.BindMovieViewHolder
 import com.companyname.shared.entities.BaseMovie
-import kotlinx.android.synthetic.main.holder_movie_light.view.*
 
 class LightMovieViewHolder(context: Context, root: ViewGroup) : BindMovieViewHolder(
         LayoutInflater.from(context).inflate(R.layout.holder_movie_light, root, false)
 ) {
+    val viewBind = HolderMovieLightBinding.bind(itemView)
+
     override fun bind(movie: BaseMovie) {
-        itemView.tvTitle.text = movie.title
-        itemView.tvRatingLight.text = movie.rating.toString()
-        itemView.tvYearLight.text = movie.year.split("-")[0]
+        viewBind.tvTitle.text = movie.title
+        viewBind.tvRatingLight.text = movie.rating.toString()
+        viewBind.tvYearLight.text = movie.year.split("-")[0]
     }
 }

@@ -1,34 +1,22 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
-val serialization_plugin_version: String by project
-val ktor_version: String by project
-val serialization_version: String by project
-
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization") version "1.4.10"
 }
 
-configurations.create("compileClasspath")
-
 kotlin {
     android()
     ios {
         binaries {
             framework {
-                baseName = "shared"
+                baseName = "card:movie:shared"
             }
         }
     }
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-client-core:$ktor_version")
-                implementation("io.ktor:ktor-client-cio:$ktor_version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
-            }
-        }
+        val commonMain by getting
         val androidMain by getting
         val iosMain by getting
     }
