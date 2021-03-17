@@ -11,7 +11,8 @@ import androidx.core.view.ViewCompat
 import androidx.customview.widget.ViewDragHelper
 import kotlin.math.abs
 
-class MovieSheetBehavior(context: Context, attrs: AttributeSet): CoordinatorLayout.Behavior<ConstraintLayout>(context, attrs) {
+class MovieSheetBehavior(context: Context, attrs: AttributeSet) :
+    CoordinatorLayout.Behavior<ConstraintLayout>(context, attrs) {
     private var minTop = 0
     private var maxTop = 1080
     private var initialTop = 0
@@ -21,21 +22,21 @@ class MovieSheetBehavior(context: Context, attrs: AttributeSet): CoordinatorLayo
     private var initialY = 0
     private var childMoved = false
 
-    companion object{
+    companion object {
         fun getShowMovieCardMultiplier(child: View, parent: View): Float {
             val maxTop = getMaxTop(parent)
-            return 2f - child.top.toFloat()*2f/maxTop
+            return 2f - child.top.toFloat() * 2f / maxTop
         }
 
         private fun getInitialTop(parent: View): Int {
-            return parent.height/2
+            return parent.height / 2
         }
 
         private fun getMaxTop(parent: View): Int {
             return parent.height
         }
 
-        private fun getMinTop(child: View, parent: View): Int{
+        private fun getMinTop(child: View, parent: View): Int {
             return parent.height - child.height
         }
     }
@@ -49,11 +50,13 @@ class MovieSheetBehavior(context: Context, attrs: AttributeSet): CoordinatorLayo
         heightUsed: Int
     ): Boolean {
         val parentHeightSpec = View.MeasureSpec.getSize(parentHeightMeasureSpec)
-        parent.onMeasureChild(child,
+        parent.onMeasureChild(
+            child,
             parentWidthMeasureSpec,
             widthUsed,
             View.MeasureSpec.makeMeasureSpec(parentHeightSpec, View.MeasureSpec.UNSPECIFIED),
-            heightUsed)
+            heightUsed
+        )
         return true
     }
 
@@ -76,7 +79,7 @@ class MovieSheetBehavior(context: Context, attrs: AttributeSet): CoordinatorLayo
         return true
     }
 
-    private fun updateConstants(child: View, parent: View){
+    private fun updateConstants(child: View, parent: View) {
         initialTop = getInitialTop(parent)
         maxTop = getMaxTop(parent)
         minTop = getMinTop(child, parent)
@@ -95,7 +98,7 @@ class MovieSheetBehavior(context: Context, attrs: AttributeSet): CoordinatorLayo
             return true
         return event.action == MotionEvent.ACTION_MOVE
                 && dragHelper != null
-                && abs(initialY - event.y) > dragHelper?.touchSlop?:4000
+                && abs(initialY - event.y) > dragHelper?.touchSlop ?: 4000
     }
 
     override fun onTouchEvent(
@@ -106,37 +109,39 @@ class MovieSheetBehavior(context: Context, attrs: AttributeSet): CoordinatorLayo
         dragHelper?.processTouchEvent(event)
 
         if (event.action == MotionEvent.ACTION_MOVE) {
-            if (abs(initialY - event.y) > dragHelper?.touchSlop ?:4000) {
+            if (abs(initialY - event.y) > dragHelper?.touchSlop ?: 4000) {
                 dragHelper?.captureChildView(child, event.getPointerId(event.actionIndex))
             }
         }
         return true
     }
 
-    private fun settle(child: View){
-        dragHelper?.let {dh ->
+    private fun settle(child: View) {
+        dragHelper?.let { dh ->
             dh.smoothSlideViewTo(child, child.left, initialTop)
             ViewCompat.postOnAnimation(child, SettleRunnable(child, dh))
         }
     }
 
-    private fun fling(child: View){
+    private fun fling(child: View) {
         dragHelper?.let { dh ->
-            dh.flingCapturedView(child.left,
+            dh.flingCapturedView(
+                child.left,
                 minTop,
                 child.left,
-                initialTop)
+                initialTop
+            )
             ViewCompat.postOnAnimation(child, SettleRunnable(child, dh))
         }
     }
 
-    private val dragCallback = object : ViewDragHelper.Callback(){
+    private val dragCallback = object : ViewDragHelper.Callback() {
         override fun tryCaptureView(child: View, pointerId: Int): Boolean {
             return child.id == childId
         }
 
         override fun onViewDragStateChanged(state: Int) {
-            if (state == ViewDragHelper.STATE_DRAGGING){
+            if (state == ViewDragHelper.STATE_DRAGGING) {
                 childMoved = true
             }
         }
@@ -154,7 +159,7 @@ class MovieSheetBehavior(context: Context, attrs: AttributeSet): CoordinatorLayo
         }
 
         override fun onViewReleased(releasedChild: View, xvel: Float, yvel: Float) {
-            if (releasedChild.top > initialTop){
+            if (releasedChild.top > initialTop) {
                 settle(releasedChild)
             } else {
                 fling(releasedChild)
@@ -162,7 +167,8 @@ class MovieSheetBehavior(context: Context, attrs: AttributeSet): CoordinatorLayo
         }
     }
 
-    private class SettleRunnable(private val view: View, private val dragHelper: ViewDragHelper): Runnable{
+    private class SettleRunnable(private val view: View, private val dragHelper: ViewDragHelper) :
+        Runnable {
         override fun run() {
             if (dragHelper.continueSettling(true))
                 ViewCompat.postOnAnimation(view, this)

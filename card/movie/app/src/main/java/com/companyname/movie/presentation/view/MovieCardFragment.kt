@@ -30,7 +30,7 @@ import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 
-class MovieCardFragment: Fragment() {
+class MovieCardFragment : Fragment() {
     private lateinit var viewModel: MovieViewModel
     private var shortScreenMenu: MenuItem? = null
     private lateinit var component: MovieComponent
@@ -79,7 +79,7 @@ class MovieCardFragment: Fragment() {
                 viewBind.description.text = it
             }
         })
-        viewModel.getErrorOnLoading().observe(viewLifecycleOwner, {error ->
+        viewModel.getErrorOnLoading().observe(viewLifecycleOwner, { error ->
             error?.let {
                 Snackbar.make(
                     viewBind.cardContainer,
@@ -123,18 +123,19 @@ class MovieCardFragment: Fragment() {
 
     private val coverGlobalListener = object :
         ViewTreeObserver.OnGlobalLayoutListener {
-            private lateinit var posterPath: String
-            fun setPosterPath(path: String): ViewTreeObserver.OnGlobalLayoutListener{
-                posterPath = path
-                return this
-            }
-            override fun onGlobalLayout() {
-                viewBind.cover.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                setCover(posterPath)
-            }
+        private lateinit var posterPath: String
+        fun setPosterPath(path: String): ViewTreeObserver.OnGlobalLayoutListener {
+            posterPath = path
+            return this
         }
 
-    private val modeListener = object : PosterModeListener{
+        override fun onGlobalLayout() {
+            viewBind.cover.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            setCover(posterPath)
+        }
+    }
+
+    private val modeListener = object : PosterModeListener {
         override fun modeIsTranslate() {
             shortScreenMenu?.isVisible = true
             shortScreenMenu?.title = getString(R.string.show_screen_simulation)
@@ -142,6 +143,7 @@ class MovieCardFragment: Fragment() {
                 viewBind.shortScreenPadding?.visibility = View.VISIBLE; true
             }
         }
+
         override fun modeIsScale() {
             shortScreenMenu?.title = getString(R.string.hide_screen_simulation)
             shortScreenMenu?.setOnMenuItemClickListener {
@@ -152,13 +154,17 @@ class MovieCardFragment: Fragment() {
 
     private fun setCover(posterPath: String) {
         val poster = viewBind.cover as ImageView
-        if (poster is TopCenterOrScaleImageView){
+        if (poster is TopCenterOrScaleImageView) {
             poster.setModeListener(modeListener)
         }
         val coverWidth = poster.measuredWidth
         if (coverWidth == 0) {
             poster.viewTreeObserver.removeOnGlobalLayoutListener(coverGlobalListener)
-            poster.viewTreeObserver.addOnGlobalLayoutListener(coverGlobalListener.setPosterPath(posterPath))
+            poster.viewTreeObserver.addOnGlobalLayoutListener(
+                coverGlobalListener.setPosterPath(
+                    posterPath
+                )
+            )
         } else {
             val posterSize = Constants.POSTER_SIZES.firstOrNull { it >= coverWidth }
                 ?: Constants.POSTER_SIZES.last()
@@ -206,7 +212,7 @@ class MovieCardFragment: Fragment() {
         }
     }
 
-    private fun setCrew(crew: List<CrewMember>){
+    private fun setCrew(crew: List<CrewMember>) {
         if (crew.isNotEmpty()) {
             viewBind.crewLabel.visibility = View.VISIBLE
             viewBind.crewLayout.visibility = View.VISIBLE
@@ -216,7 +222,7 @@ class MovieCardFragment: Fragment() {
         }
     }
 
-    private fun setCast(cast: List<Actor>){
+    private fun setCast(cast: List<Actor>) {
         if (cast.isNotEmpty()) {
             viewBind.castLabel.visibility = View.VISIBLE
             viewBind.castLayout.visibility = View.VISIBLE
@@ -226,21 +232,23 @@ class MovieCardFragment: Fragment() {
         }
     }
 
-    private fun RecyclerView.addEdgeDecoration(){
-        this.addItemDecoration(object : RecyclerView.ItemDecoration(){
+    private fun RecyclerView.addEdgeDecoration() {
+        this.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
                 view: View,
                 parent: RecyclerView,
                 state: RecyclerView.State
             ) {
-                val itemsCount = parent.adapter?.itemCount?:0
+                val itemsCount = parent.adapter?.itemCount ?: 0
                 val position = parent.getChildAdapterPosition(view)
-                val padding = resources.getDimensionPixelSize(com.companyname.moviedb.R.dimen.default_small_margin)
-                val margin = resources.getDimensionPixelSize(com.companyname.moviedb.R.dimen.default_margin)
+                val padding =
+                    resources.getDimensionPixelSize(com.companyname.moviedb.R.dimen.default_small_margin)
+                val margin =
+                    resources.getDimensionPixelSize(com.companyname.moviedb.R.dimen.default_margin)
                 if (position == 0)
                     outRect.left = margin - padding
-                if (position == itemsCount-1)
+                if (position == itemsCount - 1)
                     outRect.right = margin - padding
             }
         })

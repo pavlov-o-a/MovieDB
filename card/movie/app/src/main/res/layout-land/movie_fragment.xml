@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
@@ -15,7 +14,7 @@
         android:background="@color/colorPrimary"
         app:titleTextColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
-        tools:title = "Movie name"/>
+        tools:title="Movie name" />
 
     <androidx.core.widget.NestedScrollView
         android:background="@color/white"
@@ -46,7 +45,7 @@
                     android:adjustViewBounds="true"
                     tools:srcCompat="@color/thick_yellow"
                     app:layout_constraintTop_toBottomOf="@id/toolbar"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
             </com.companyname.common.views.RoundCornersContainer>
 
 
@@ -61,7 +60,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/coverContainer"/>
+                app:layout_constraintStart_toEndOf="@id/coverContainer" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/description"
@@ -77,8 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@id/descriptionLabel"
                 app:layout_constraintStart_toEndOf="@id/coverContainer"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description "
-                />
+                tools:text="Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description Long movie description " />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imdbIcon"
@@ -90,7 +88,7 @@
                 tools:visibility="visible"
                 app:srcCompat="@drawable/imdb"
                 app:layout_constraintStart_toEndOf="@id/coverContainer"
-                app:layout_constraintTop_toBottomOf="@id/description"/>
+                app:layout_constraintTop_toBottomOf="@id/description" />
 
             <TextView
                 android:id="@+id/imdbLink"
@@ -103,7 +101,7 @@
                 tools:text="234523515"
                 app:layout_constraintTop_toTopOf="@id/imdbIcon"
                 app:layout_constraintBottom_toBottomOf="@id/imdbIcon"
-                app:layout_constraintStart_toEndOf="@id/imdbIcon"/>
+                app:layout_constraintStart_toEndOf="@id/imdbIcon" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/ratingLabel"
@@ -116,7 +114,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/coverContainer"/>
+                app:layout_constraintTop_toBottomOf="@id/coverContainer" />
 
             <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/rating"
@@ -135,7 +133,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@id/ratingLabel"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/genresLabel"
@@ -148,7 +146,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rating"/>
+                app:layout_constraintTop_toBottomOf="@id/rating" />
 
             <com.nex3z.flowlayout.FlowLayout
                 android:id="@+id/genresFlow"
@@ -166,25 +164,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     app:chipBackgroundColor="@color/genre_chip_color_list"
-                    tools:text="Genre1"/>
+                    tools:text="Genre1" />
+
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     app:chipBackgroundColor="@color/genre_chip_color_list"
-                    tools:text="LongGenre"/>
+                    tools:text="LongGenre" />
+
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     app:chipBackgroundColor="@color/genre_chip_color_list"
-                    tools:text="VeryLongGenre"/>
+                    tools:text="VeryLongGenre" />
+
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     app:chipBackgroundColor="@color/genre_chip_color_list"
-                    tools:text="NormalGenre"/>
+                    tools:text="NormalGenre" />
             </com.nex3z.flowlayout.FlowLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -198,7 +199,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/genresFlow"/>
+                app:layout_constraintTop_toBottomOf="@id/genresFlow" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/castLayout"
@@ -213,7 +214,7 @@
                 tools:listitem="@layout/credit_holder"
                 app:layout_constraintTop_toBottomOf="@id/castLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/crewLabel"
@@ -226,7 +227,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/castLayout"/>
+                app:layout_constraintTop_toBottomOf="@id/castLayout" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/crewLayout"
@@ -241,7 +242,7 @@
                 tools:listitem="@layout/credit_holder"
                 app:layout_constraintTop_toBottomOf="@id/crewLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <FrameLayout
                 android:id="@+id/progress"
@@ -251,10 +252,11 @@
                 android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
+
                 <ProgressBar
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center" />
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

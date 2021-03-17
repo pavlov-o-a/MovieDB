@@ -7,7 +7,8 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.math.MathUtils
 import com.companyname.movie.R
 
-class PosterBehavior(context: Context, attrs: AttributeSet): CoordinatorLayout.Behavior<TopCenterOrScaleImageView>(context, attrs)  {
+class PosterBehavior(context: Context, attrs: AttributeSet) :
+    CoordinatorLayout.Behavior<TopCenterOrScaleImageView>(context, attrs) {
 
     override fun layoutDependsOn(
         parent: CoordinatorLayout,

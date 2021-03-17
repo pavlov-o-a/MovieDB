@@ -36,7 +36,7 @@ class ImageViewBackLight @JvmOverloads constructor(
         pickBackLight()
     }
 
-    private fun pickBackLight(){
+    private fun pickBackLight() {
         drawable?.let {
             val bitmap = it.toBitmap(BITMAP_SIZE, BITMAP_SIZE)
             pickImageBackLight2(bitmap)
@@ -47,7 +47,7 @@ class ImageViewBackLight @JvmOverloads constructor(
         //we take pixels only from top half of the frame with FRAME_WIDTH
         //because in movie card ony top half of picture is visible on opening
         val framePixels = mutableListOf<Int>()
-        for (j in 0 until bitmap.height/2){
+        for (j in 0 until bitmap.height / 2) {
             if (j <= FRAME_WIDTH) {
                 for (i in 0 until bitmap.width)
                     framePixels.add(bitmap.getPixel(i, j))
@@ -63,15 +63,16 @@ class ImageViewBackLight @JvmOverloads constructor(
         var maxColorWeight = 0
         var newMaxWeight: Int
         var popularColor = framePixels[0]
-        for (pixel in framePixels){
+        for (pixel in framePixels) {
             newMaxWeight = 0
-            for (other in framePixels){
+            for (other in framePixels) {
                 if (abs(Color.red(pixel) - Color.red(other)) < threshold
                     && abs(Color.green(pixel) - Color.green(other)) < threshold
-                    && abs(Color.blue(pixel) - Color.blue(other)) < threshold)
+                    && abs(Color.blue(pixel) - Color.blue(other)) < threshold
+                )
                     newMaxWeight++
             }
-            if (newMaxWeight > maxColorWeight){
+            if (newMaxWeight > maxColorWeight) {
                 popularColor = pixel
                 maxColorWeight = newMaxWeight
             }

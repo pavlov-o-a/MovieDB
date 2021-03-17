@@ -9,9 +9,11 @@ import com.companyname.shared.Constants
 import com.companyname.movie.R
 import com.companyname.movie.databinding.CreditHolderBinding
 
-class CreditsAdapter(val data: List<CreditData>): RecyclerView.Adapter<CreditsHolder>() {
+class CreditsAdapter(val data: List<CreditData>) : RecyclerView.Adapter<CreditsHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreditsHolder {
-        return CreditsHolder(LayoutInflater.from(parent.context).inflate(R.layout.credit_holder, parent,false))
+        return CreditsHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.credit_holder, parent, false)
+        )
     }
 
     override fun getItemCount() = data.size
@@ -21,7 +23,7 @@ class CreditsAdapter(val data: List<CreditData>): RecyclerView.Adapter<CreditsHo
     }
 }
 
-class CreditsHolder(view: View): RecyclerView.ViewHolder(view) {
+class CreditsHolder(view: View) : RecyclerView.ViewHolder(view) {
     val bind = CreditHolderBinding.bind(view)
 
     fun bind(data: CreditData) {

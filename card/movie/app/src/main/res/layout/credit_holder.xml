@@ -14,11 +14,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/creditCover"
             android:layout_width="@dimen/credit_holder_width"
             android:layout_height="@dimen/credit_holder_height"
-            app:srcCompat="@drawable/profile"/>
+            app:srcCompat="@drawable/profile" />
     </com.companyname.common.views.RoundCornersContainer>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -32,7 +33,7 @@
         tools:text="Name"
         app:layout_constraintTop_toBottomOf="@id/creditCoverContainer"
         app:layout_constraintStart_toStartOf="@id/creditCoverContainer"
-        app:layout_constraintEnd_toEndOf="@id/creditCoverContainer"/>
+        app:layout_constraintEnd_toEndOf="@id/creditCoverContainer" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/creditRole"
@@ -45,5 +46,5 @@
         tools:text="Role"
         app:layout_constraintTop_toBottomOf="@id/creditName"
         app:layout_constraintStart_toStartOf="@id/creditCoverContainer"
-        app:layout_constraintEnd_toEndOf="@id/creditCoverContainer"/>
+        app:layout_constraintEnd_toEndOf="@id/creditCoverContainer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

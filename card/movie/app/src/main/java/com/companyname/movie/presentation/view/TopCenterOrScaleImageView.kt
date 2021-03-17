@@ -30,7 +30,7 @@ class TopCenterOrScaleImageView @JvmOverloads constructor(
         super.setScaleType(ScaleType.FIT_CENTER)
     }
 
-    fun setScaleMultiplier(m: Float){
+    fun setScaleMultiplier(m: Float) {
         if (m in 0f..1f) {
             if (scaleMultiplier != m) {
                 scaleMultiplier = m
@@ -42,23 +42,25 @@ class TopCenterOrScaleImageView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         drawable?.let {
             imageMatrix.getValues(imageMatrixArray)
-            val imgWidth = it.intrinsicWidth* imageMatrixArray[0] + it.intrinsicHeight* imageMatrixArray[1]
-            val imgHeight = it.intrinsicWidth* imageMatrixArray[3] + it.intrinsicHeight* imageMatrixArray[4]
+            val imgWidth =
+                it.intrinsicWidth * imageMatrixArray[0] + it.intrinsicHeight * imageMatrixArray[1]
+            val imgHeight =
+                it.intrinsicWidth * imageMatrixArray[3] + it.intrinsicHeight * imageMatrixArray[4]
             topCenterMatrix.reset()
             //(TRANSLATE case)
-            if (imgHeight < height){
+            if (imgHeight < height) {
                 modeListener?.modeIsTranslate()
-                val dif = (height - imgHeight)/2f
+                val dif = (height - imgHeight) / 2f
                 topCenterMatrix.postTranslate(0f, -dif)
                 canvas?.setMatrix(topCenterMatrix)
             }
             //(SCALE case)
-            if  (imgWidth < width){
+            if (imgWidth < width) {
                 modeListener?.modeIsScale()
-                val dif = width.toFloat()/imgWidth
-                val scale = 1 + (width.toFloat()/imgWidth - 1) * scaleMultiplier
+                val dif = width.toFloat() / imgWidth
+                val scale = 1 + (width.toFloat() / imgWidth - 1) * scaleMultiplier
                 topCenterMatrix.postScale(scale, scale)
-                val translateX = (width - imgWidth)/2f * dif * scaleMultiplier
+                val translateX = (width - imgWidth) / 2f * dif * scaleMultiplier
                 topCenterMatrix.postTranslate(-translateX, 0f)
                 canvas?.setMatrix(topCenterMatrix)
             }
@@ -66,12 +68,12 @@ class TopCenterOrScaleImageView @JvmOverloads constructor(
         super.onDraw(canvas)
     }
 
-    fun setModeListener(listener: PosterModeListener){
+    fun setModeListener(listener: PosterModeListener) {
         modeListener = listener
     }
 }
 
-interface PosterModeListener{
+interface PosterModeListener {
     fun modeIsTranslate()
     fun modeIsScale()
 }

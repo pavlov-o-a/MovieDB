@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <size
+                android:width="@dimen/credit_holder_width"
+                android:height="@dimen/credit_holder_height" />
+            <solid android:color="@color/light_grey" />
+        </shape>
+        <color android:color="@color/light_grey" />
+    </item>
+    <item>
+        <bitmap
+            android:src="@drawable/ic_profile"
+            android:gravity="center"
+            android:tint="@color/grey" />
+    </item>
+</layer-list>

@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 @MovieScope
-class MovieViewModel @Inject constructor(private val logic: Logic): ViewModel() {
+class MovieViewModel @Inject constructor(private val logic: Logic) : ViewModel() {
     private lateinit var baseMovie: BaseMovie
     private var fullMovie: Movie? = null
     private var credits: Credits? = null
@@ -58,7 +58,7 @@ class MovieViewModel @Inject constructor(private val logic: Logic): ViewModel() 
         }
     }
 
-    private fun loadCredits(){
+    private fun loadCredits() {
         if (credits == null) {
             viewModelScope.launch {
                 val repositoryData = withContext(Dispatchers.IO) {
@@ -114,7 +114,8 @@ class MovieViewModel @Inject constructor(private val logic: Logic): ViewModel() 
 }
 
 @MovieScope
-class MovieViewModelFactory @Inject constructor(private val viewModel: Provider<MovieViewModel>): ViewModelProvider.Factory{
+class MovieViewModelFactory @Inject constructor(private val viewModel: Provider<MovieViewModel>) :
+    ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.name == MovieViewModel::class.qualifiedName)
             return viewModel.get() as T
