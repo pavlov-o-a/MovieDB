@@ -3,6 +3,7 @@
 ### Features:
 
 * project has multiple feature modules.
+* project has Kotlin Multiplatform module with shareable business logic.
 * project is written in kotlin.
 * uses coroutines.
 * uses dagger.
