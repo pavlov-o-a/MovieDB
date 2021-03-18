@@ -12,3 +12,5 @@
 
 ![](https://github.com/pavlov-o-a/MovieDB/blob/master/media_for_md/shimmer.gif)
 ![](https://github.com/pavlov-o-a/MovieDB/blob/master/media_for_md/movie_card.gif)
+
+![](https://github.com/pavlov-o-a/MovieDB/blob/master/media_for_md/project_structure.jpg)
